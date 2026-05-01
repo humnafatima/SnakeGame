@@ -1,0 +1,10 @@
+# Ignore executables
+*.exe
+
+# Optional: ignore other build files
+*.out
+*.o
+*.obj
+
+# Optional: ignore VS Code temp files
+.vscode/*.log
