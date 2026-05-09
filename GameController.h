@@ -3,40 +3,20 @@
 #include "food.h"
 #include "obstacle.h"
 #include "board.h"
-
-enum class GameState { MENU, PLAYING, GAME_OVER };
+#include <vector>
 
 class GameController {
 private:
-    Board      board;
-    Snake      snake;
-    Food       food;
-    Obstacle   obstacle;
-
-    int        score;
-    int        highScore;
-    GameState  state;
-
-    int        cols;
-    int        rows;
-    int        cellSize;
-
-    float      moveTimer;
-    float      moveInterval;
-
-    void  checkFoodCollision();
-    void  checkObstacleCollision();
-    void  resetGame();
-    void  drawHUD()      const;
-    void  drawMenu()     const;
-    void  drawGameOver() const;
+    Snake snake;
+    Food food;
+    std::vector<Obstacle> obstacles;
+    Board board;
+    bool gameOver;
+    int score;
 
 public:
-    GameController(int cols, int rows, int cellSize);
-
-    void handleInput();
-    void update(float deltaTime);
-    void draw()  const;
-
-    bool isRunning() const;
+    GameController();
+    void update();
+    void draw();
+    bool isGameOver() const { return gameOver; }
 };
