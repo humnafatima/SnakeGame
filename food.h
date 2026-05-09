@@ -1,23 +1,28 @@
-#ifndef FOOD_H
-#define FOOD_H
-
+#pragma once
 #include "GameObject.h"
-#include "Position.h"
+#include "snake.h"
+#include <cstdlib>
+
+enum FoodType { NORMAL, SPECIAL };
 
 class Food : public GameObject {
-private:
-    Position pos;
-    bool special; // true = special food
-
 public:
-    Food();
-
-    void generate();
-    Position getPosition();
-    bool isSpecial();
+    Food(int boardRows, int boardCols);
 
     void draw() override;
     void update() override;
-};
 
-#endif
+    Position getPosition() const;
+    FoodType getType() const;
+    int getPoints() const;
+    void respawn();
+    char getSymbol() const;
+
+private:
+    Position pos;
+    FoodType type;
+    int boardRows, boardCols;
+    int specialTimer;
+
+    void randomize();
+};
