@@ -1,3 +1,5 @@
+//humna 
+
 #pragma once
 #include "Position.h"
 #include <list>
@@ -10,26 +12,27 @@ private:
     Direction dir;
     Direction nextDir;
     bool growing;
+    int upKey, downKey, leftKey, rightKey;  // customizable controls
 
 public:
     Snake();
+    Snake(int startX, int startY, int upKey, int downKey, int leftKey, int rightKey);
 
+    const std::list<Position>& getBody() const;
+    
     // Rule of Three
     Snake(const Snake& other);
     Snake& operator=(const Snake& other);
-
-    // Operator overload
     bool operator==(const Snake& other) const;
 
-    // What GameController calls
     void update();
-    void draw();
+    void draw(Color headColor, Color bodyColor);  // each player different color
     void grow();
     bool checkSelfCollision() const;
+    bool collidesWithOther(const Snake& other) const;  // 2 player collision
     Position getHead() const;
-
-    // Extras
     void changeDirection(Direction newDir);
     bool containsPosition(const Position& p) const;
     std::list<Position>& getBody();
+    int getLength() const { return (int)body.size(); }
 };
