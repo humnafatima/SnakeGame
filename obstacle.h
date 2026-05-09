@@ -1,5 +1,6 @@
-#ifndef OBSTACLE_H
-#define OBSTACLE_H //dont understand these lines yet hence not written in every part 
+//humna
+
+#pragma once
 
 #include "GameObject.h"
 #include "Position.h"
@@ -16,5 +17,3 @@ public:
     void draw() override;
     void update() override;
 };
-
-#endif
