@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "brain.h"
 
 int main() {
     InitWindow(800, 600, "Raylib Test");   // Create a window
