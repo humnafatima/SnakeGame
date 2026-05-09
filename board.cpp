@@ -1,3 +1,12 @@
-//Draws everything: Snake, Food, Obstacles, Walls
+#include "Board.h"
+#include "raylib.h"
 
-//void draw(Snake&, Food&, vector<Obstacle>&);
+void Board::drawGrid() {
+
+    for (int i = 0; i <= 600; i += 30) {
+
+        DrawLine(i, 0, i, 600, DARKGRAY);
+
+        DrawLine(0, i, 600, i, DARKGRAY);
+    }
+}
