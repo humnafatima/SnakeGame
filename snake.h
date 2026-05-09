@@ -32,6 +32,7 @@ public:
     bool checkSelfCollision() const;
     bool collidesWithOther(const Snake& other) const;  // 2 player collision
     Position getHead() const;
+    Direction getDirection() const { return dir; }
     void changeDirection(Direction newDir);
     bool containsPosition(const Position& p) const;
     std::list<Position>& getBody();
