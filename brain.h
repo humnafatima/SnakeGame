@@ -1,18 +1,15 @@
 #pragma once
-#include "Position.h"
-
-
-enum class Direction { UP, DOWN, LEFT, RIGHT }; //a new data type 
+#include "snake.h"  // gets us Position and Direction
 
 class Brain {
 public:
-    Brain(); // constructor, will set the starting direction to RIGHT
-    void setDirection(Direction newDir); //Take input from WASD 
-     Direction getDirection() const;
-     Position computeNextHead(const Position& head) const; //TAKES CURRENT HEAD POSITION AND RETURN NEXT HEAD POSITION 
+    Brain();
 
+    void setDirection(Direction newDir);
+    Direction getDirection() const;
+    Position computeNextHead(const Position& head) const;
 
-     private:
+private:
     Direction current;
     bool isOpposite(Direction a, Direction b) const;
 };

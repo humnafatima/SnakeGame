@@ -1,6 +1,6 @@
 #include "brain.h"
 
-Brain::Brain() : current(Direction::RIGHT) {}
+Brain::Brain() : current(RIGHT) {}  // no Direction:: because it's a plain enum
 
 void Brain::setDirection(Direction newDir) {
     if (!isOpposite(newDir, current))
@@ -13,16 +13,16 @@ Direction Brain::getDirection() const {
 
 Position Brain::computeNextHead(const Position& head) const {
     switch (current) {
-        case Direction::UP:    return Position(head.x - 1, head.y);
-        case Direction::DOWN:  return Position(head.x + 1, head.y);
-        case Direction::LEFT:  return Position(head.x, head.y - 1);
-        case Direction::RIGHT: return Position(head.x, head.y + 1);
+        case UP:    return Position(head.x, head.y - 1);
+        case DOWN:  return Position(head.x, head.y + 1);
+        case LEFT:  return Position(head.x - 1, head.y);
+        case RIGHT: return Position(head.x + 1, head.y);
     }
 }
 
 bool Brain::isOpposite(Direction a, Direction b) const {
-    return (a == Direction::UP    && b == Direction::DOWN)  ||
-           (a == Direction::DOWN  && b == Direction::UP)    ||
-           (a == Direction::LEFT  && b == Direction::RIGHT) ||
-           (a == Direction::RIGHT && b == Direction::LEFT);
+    return (a == UP    && b == DOWN)  ||
+           (a == DOWN  && b == UP)    ||
+           (a == LEFT  && b == RIGHT) ||
+           (a == RIGHT && b == LEFT);
 }
