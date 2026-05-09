@@ -1,16 +1,19 @@
 #include "food.h"
+#include "raylib.h"
+
+const int FOOD_CELL = 30;
 
 Food::Food(int boardRows, int boardCols)
-    : pos(1, 1), type(NORMAL), boardRows(boardRows), 
+    : pos(1, 1), type(NORMAL), boardRows(boardRows),
       boardCols(boardCols), specialTimer(0) {
     randomize();
 }
 
 void Food::randomize() {
     do {
-        pos = Position(rand() % (boardCols - 2) + 1, 
+        pos = Position(rand() % (boardCols - 2) + 1,
                        rand() % (boardRows - 2) + 1);
-    } while (pos.x == 10 && pos.y == 10); // avoid snake start
+    } while (pos.x == 10 && pos.y == 10);
 
     type = (rand() % 4 == 0) ? SPECIAL : NORMAL;
     specialTimer = 20;
@@ -25,8 +28,18 @@ void Food::update() {
 }
 
 void Food::draw() {
-    // Board handles cursor positioning
-    // getSymbol() gives the character to print
+    int px = pos.x * FOOD_CELL;
+    int py = pos.y * FOOD_CELL;
+
+    if (type == SPECIAL) {
+        // gold square for special food
+        DrawRectangle(px + 2, py + 2, FOOD_CELL - 4, FOOD_CELL - 4, GOLD);
+        DrawText("$", px + 8, py + 6, 20, WHITE);
+    } else {
+        // red circle for normal food
+        DrawCircle(px + FOOD_CELL/2, py + FOOD_CELL/2,
+                   FOOD_CELL/2 - 3, RED);
+    }
 }
 
 void Food::respawn() {
@@ -42,7 +55,7 @@ FoodType Food::getType() const {
 }
 
 int Food::getPoints() const {
-    return (type == SPECIAL) ? 5 : 1;
+    return (type == SPECIAL) ? 20 : 10;
 }
 
 char Food::getSymbol() const {
