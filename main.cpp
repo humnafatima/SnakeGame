@@ -1,45 +1,27 @@
 #include "raylib.h"
-#include "snake.h"
-
-const int cellSize = 20;
-const int screenWidth = 800;
-const int screenHeight = 600;
+#include "GameController.h"
 
 int main() {
+    const int COLS      = 20;
+    const int ROWS      = 20;
+    const int CELL_SIZE = 30;
 
-    InitWindow(screenWidth, screenHeight, "Snake Test");
-    SetTargetFPS(10);
+    const int SCREEN_W  = COLS * CELL_SIZE + 160;
+    const int SCREEN_H  = ROWS * CELL_SIZE;
 
-    Snake snake;
+    InitWindow(SCREEN_W, SCREEN_H, "Snake Game — OOP Project");
+    SetTargetFPS(60);
 
-    while (!WindowShouldClose()) {
+    GameController game(COLS, ROWS, CELL_SIZE);
 
-        // INPUT
-        if (IsKeyPressed(KEY_W)) snake.changeDirection(UP);
-        if (IsKeyPressed(KEY_S)) snake.changeDirection(DOWN);
-        if (IsKeyPressed(KEY_A)) snake.changeDirection(LEFT);
-        if (IsKeyPressed(KEY_D)) snake.changeDirection(RIGHT);
+    while (game.isRunning()) {
+        game.handleInput();
+        game.update(GetFrameTime());
 
-        // UPDATE
-        snake.move();
-
-        // DRAW
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-
-        for (auto& segment : snake.getBody()) {
-            DrawRectangle(
-                segment.x * cellSize,
-                segment.y * cellSize,
-                cellSize,
-                cellSize,
-                GREEN
-            );
-        }
-
+        game.draw();
         EndDrawing();
     }
-
     CloseWindow();
     return 0;
 }
