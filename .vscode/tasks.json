@@ -2,27 +2,37 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build Current File (Raylib)",
+            "label": "Build Snake Game",
             "type": "shell",
             "command": "g++",
             "args": [
-                "-I${workspaceFolder}/raylib/include",
-                "${file}",
+                "main.cpp",
+                "snake.cpp",
+                "Position.cpp",
+                "food.cpp",
+                "board.cpp",
+                "brain.cpp",
+                "obstacle.cpp",
+                "libraries.cpp",
+
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe",
-                "-L${workspaceFolder}/raylib/lib",
+                "game.exe",
+
+                "-I",
+                "C:/Users/HP/Desktop/visual studio code/Snake Game/Raylib/include",
+
+                "-L",
+                "C:/Users/HP/Desktop/visual studio code/Snake Game/Raylib/lib",
+
                 "-lraylib",
                 "-lopengl32",
                 "-lgdi32",
-                "-lwinmm",
-                "-lm",
-                "-mwindows"
+                "-lwinmm"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "problemMatcher": ["$gcc"]
+            }
         }
     ]
 }

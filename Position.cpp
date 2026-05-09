@@ -1,4 +1,5 @@
 #include "Position.h"
+#include <raylib.h>
 
 Position::Position(int x, int y) {
     this->x = x;
