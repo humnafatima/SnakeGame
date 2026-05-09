@@ -6,7 +6,7 @@
 
 GameController::GameController()
 
-    : food(20, 20),
+    : food(26, 26),
 
       snake1(5,  10, KEY_W, KEY_S, KEY_A, KEY_D),
 
@@ -26,8 +26,6 @@ GameController::GameController()
 
 }
 
- 
-
 void GameController::reshuffleObstacles() {
 
     obstacles.clear();
@@ -38,25 +36,17 @@ void GameController::reshuffleObstacles() {
 
 }
 
- 
-
 void GameController::update() {
 
     if (gameOver) return;
-
- 
 
     snake1.update();
 
     snake2.update();
 
- 
-
     Position head1 = snake1.getHead();
 
     Position head2 = snake2.getHead();
-
- 
 
     // Food collision
 
@@ -84,19 +74,13 @@ void GameController::update() {
 
     }
 
- 
-
-    food.update();
-
- 
+    food.update(); 
 
     // Wall collision
 
-    bool p1Dead = (head1.x < 0 || head1.x >= 20 || head1.y < 0 || head1.y >= 20);
+    bool p1Dead = (head1.x < 0 || head1.x >= 26 || head1.y < 0 || head1.y >= 26);
 
-    bool p2Dead = (head2.x < 0 || head2.x >= 20 || head2.y < 0 || head2.y >= 20);
-
- 
+    bool p2Dead = (head2.x < 0 || head2.x >= 26 || head2.y < 0 || head2.y >= 26);
 
     // Self collision
 
@@ -104,15 +88,11 @@ void GameController::update() {
 
     if (snake2.checkSelfCollision()) p2Dead = true;
 
- 
-
     // Hit each other
 
     if (snake1.collidesWithOther(snake2)) p1Dead = true;
 
     if (snake2.collidesWithOther(snake1)) p2Dead = true;
-
- 
 
     // Obstacle collision
 
@@ -123,8 +103,6 @@ void GameController::update() {
         if (head2 == obstacles[i].getPosition()) p2Dead = true;
 
     }
-
- 
 
     if (p1Dead || p2Dead) {
 
@@ -140,8 +118,6 @@ void GameController::update() {
 
 }
 
- 
-
 void GameController::draw() {
 
     board.drawGrid();
@@ -155,8 +131,6 @@ void GameController::draw() {
     for (int i = 0; i < obstacles.size(); i++)
 
         obstacles[i].draw();
-
- 
 
     // Scores
 

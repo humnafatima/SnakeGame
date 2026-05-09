@@ -1,6 +1,7 @@
 //humna 
 
 #pragma once
+#include <raylib.h> //needed for colour since its a raylib type
 #include "Position.h"
 #include <list>
 
@@ -19,7 +20,7 @@ public:
     Snake(int startX, int startY, int upKey, int downKey, int leftKey, int rightKey);
 
     const std::list<Position>& getBody() const;
-    
+
     // Rule of Three
     Snake(const Snake& other);
     Snake& operator=(const Snake& other);
