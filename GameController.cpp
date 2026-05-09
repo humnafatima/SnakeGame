@@ -15,26 +15,22 @@ void GameController::update() {
     snake.update();
     Position head = snake.getHead();
 
-    // food collision
     if (head == food.getPosition()) {
         snake.grow();
-        score += food.getPoints();  // uses getPoints() instead of isSpecial()
-        food.respawn();             // was food.generate()
+        score += food.getPoints();  
+        food.respawn();         
     }
 
     food.update();
 
-    // wall collision
     if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20) {
         gameOver = true;
     }
 
-    // self collision
     if (snake.checkSelfCollision()) {
         gameOver = true;
     }
 
-    // obstacle collision
     for (int i = 0; i < obstacles.size(); i++) {
         if (head == obstacles[i].getPosition()) {
             gameOver = true;
