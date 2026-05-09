@@ -5,5 +5,4 @@ class Board {
 public:
     void drawGrid();
 };
-
 #endif
