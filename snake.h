@@ -1,7 +1,6 @@
 //snake.h: class definition
 
-#ifndef SNAKE_H
-#define SNAKE_H
+#pragma once
 
 #include "GameObject.h"
 
@@ -10,5 +9,3 @@ public:
     void draw() override;
     void update() override;
 };
-
-#endif
