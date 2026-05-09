@@ -1,1 +1,0 @@
-// Position is implemented in snake.cpp
