@@ -1,22 +1,22 @@
-#ifndef GAMECONTROLLER_H
-#define GAMECONTROLLER_H
-#include<vector>
-#include "Snake.h"
-#include "Food.h"
-#include "Obstacle.h"
-#include "Board.h"
- class GameController{
+#pragma once
+#include "snake.h"
+#include "food.h"
+#include "obstacle.h"
+#include "board.h"
+#include <vector>
+
+class GameController {
 private:
-Snake snake;
-Food food;
-Board board;
-std::vector<Obstacle>obstacles;
-bool gameOver;
-int score;
+    Snake snake;
+    Food food;
+    std::vector<Obstacle> obstacles;
+    Board board;
+    bool gameOver;
+    int score;
+
 public:
-GameController();
-void update();
-void draw();
-bool isGameOver();
- };
-#endif
+    GameController();
+    void update();
+    void draw();
+    bool isGameOver() const { return gameOver; }
+};

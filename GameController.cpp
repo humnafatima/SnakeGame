@@ -3,10 +3,11 @@
 GameController::GameController(){
     gameOver=false;
     score=0;
-    for(int i=0;i,5;i++){
+    for(int i=0;i<5;i++){
         obstacles.push_back(Obstacle());
     }
 }
+
 void GameController::update(){
     snake.update();
     Position head=snake.getHead();

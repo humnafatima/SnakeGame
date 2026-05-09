@@ -1,3 +1,5 @@
+//this code is perfectly fine rn 
+
 #include "brain.h"
 
 Brain::Brain() : current(RIGHT) {}  // no Direction:: because it's a plain enum
@@ -18,6 +20,7 @@ Position Brain::computeNextHead(const Position& head) const {
         case LEFT:  return Position(head.x - 1, head.y);
         case RIGHT: return Position(head.x + 1, head.y);
     }
+    return head; 
 }
 
 bool Brain::isOpposite(Direction a, Direction b) const {

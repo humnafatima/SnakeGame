@@ -1,25 +1,35 @@
 #pragma once
-#include <vector>
+#include "Position.h"
+#include <list>
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
-class Position {
-public:
-    int x, y;
-    Position(int x = 0, int y = 0);
-    bool operator==(const Position& other) const;
-};
-
 class Snake {
 private:
-    std::vector<Position> body;
+    std::list<Position> body;
     Direction dir;
+    Direction nextDir;
+    bool growing;
 
 public:
     Snake();
 
-    void move();
-    void changeDirection(Direction newDir);
+    // Rule of Three
+    Snake(const Snake& other);
+    Snake& operator=(const Snake& other);
 
-    std::vector<Position>& getBody();
+    // Operator overload
+    bool operator==(const Snake& other) const;
+
+    // What GameController calls
+    void update();
+    void draw();
+    void grow();
+    bool checkSelfCollision() const;
+    Position getHead() const;
+
+    // Extras
+    void changeDirection(Direction newDir);
+    bool containsPosition(const Position& p) const;
+    std::list<Position>& getBody();
 };
