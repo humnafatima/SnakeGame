@@ -1,4 +1,4 @@
-//neha and humna 
+//neha 
 #include "GameController.h"
 #include "raylib.h"
 #include <cstdlib>
