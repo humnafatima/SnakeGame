@@ -183,50 +183,50 @@ void GameController::draw() {
         // Title
         DrawText("SERPENT ARENA",
                 400 - MeasureText("SERPENT ARENA", 40)/2,
-                30, 40, GREEN);
+                130, 40, GREEN);
 
         // Mode selection
         DrawText("Press 1 for 1 Player vs AI",
                 400 - MeasureText("Press 1 for 1 Player vs AI", 20)/2,
-                100, 20, WHITE);
+                200, 20, WHITE);
         DrawText("Press 2 for 2 Players",
                 400 - MeasureText("Press 2 for 2 Players", 20)/2,
-                130, 20, WHITE);
+                230, 20, WHITE);
         DrawText("P1: WASD   |   P2: Arrow Keys",
                 400 - MeasureText("P1: WASD   |   P2: Arrow Keys", 16)/2,
-                160, 16, DARKGRAY);
+                260, 16, DARKGRAY);
 
         // Divider
-        DrawLine(200, 190, 600, 190, DARKGRAY);
+        DrawLine(200, 290, 600, 290, DARKGRAY);
 
         // Legend title
         DrawText("HOW TO PLAY",
                 400 - MeasureText("HOW TO PLAY", 20)/2,
-                205, 20, YELLOW);
+                305, 20, YELLOW);
 
         // Food legend
-        DrawCircle(220, 245, 10, RED);
-        DrawText("Normal Food  +10 pts", 245, 238, 18, WHITE);
+        DrawCircle(220, 345, 10, RED);
+        DrawText("Normal Food  +10 pts", 245, 338, 18, WHITE);
 
-        DrawRectangle(205, 268, 20, 20, GOLD);
+        DrawRectangle(205, 368, 20, 20, GOLD);
         DrawText("Special Food  +20 pts (disappears!)", 245, 271, 18, WHITE);
 
-        DrawRectangle(205, 303, 20, 20, DARKGRAY);
-        DrawRectangle(207, 305, 16, 16, GRAY);
-        DrawText("Obstacle  (reshuffles each food)", 245, 306, 18, WHITE);
+        DrawRectangle(205, 403, 20, 20, DARKGRAY);
+        DrawRectangle(207, 405, 16, 16, GRAY);
+        DrawText("Obstacle  (reshuffles each food)", 245, 406, 18, WHITE);
 
         // Divider
-        DrawLine(200, 335, 600, 335, DARKGRAY);
+        DrawLine(200, 435, 600, 435, DARKGRAY);
 
         DrawText("Don't hit the wall!",
-                400 - MeasureText("Don't hit the wall!", 16)/2,
-                350, 16, DARKGRAY);
+         400 - MeasureText("Don't hit the wall!", 16)/2,
+         450, 16, DARKGRAY);
         DrawText("Hit the other snake to win!",
-                400 - MeasureText("Hit the other snake to win!", 16)/2,
-                372, 16, DARKGRAY);
+        400 - MeasureText("Hit the other snake to win!", 16)/2,
+        472, 16, DARKGRAY);
         DrawText("Press R after game over to restart",
-                400 - MeasureText("Press R after game over to restart", 16)/2,
-                394, 16, DARKGRAY);
+        400 - MeasureText("Press R after game over to restart", 16)/2,
+        494, 16, DARKGRAY);
          return;
     }
 
