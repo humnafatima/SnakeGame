@@ -230,6 +230,23 @@ void GameController::draw() {
          return;
     }
 
+    // COUNTDOWN SCREEN
+    if (mode == GameMode::COUNTDOWN) {
+        for (int i = 0; i <= 800; i += 30) {
+            DrawLine(i, 0, i, 800, DARKGRAY);
+            DrawLine(0, i, 800, i, DARKGRAY);
+        }
+        int count = (int)countdownTimer + 1;
+        const char* txt = TextFormat("%i", count);
+        DrawText(txt,
+                400 - MeasureText(txt, 120)/2,
+                280, 120, GREEN);
+        DrawText("GET READY!",
+                400 - MeasureText("GET READY!", 28)/2,
+                420, 28, WHITE);
+        return;
+    }
+    
     // GRID (replaces board.drawGrid())
     for (int i = 0; i <= 800; i += 30) {
         DrawLine(i, 0, i, 800, DARKGRAY);
