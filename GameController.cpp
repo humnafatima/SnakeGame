@@ -5,12 +5,15 @@
 
 GameController::GameController()
     : food(26, 26),
+    // x=5 and y=13 for snake1 starting point
       snake1(5,  13, KEY_W, KEY_S, KEY_A, KEY_D),
+      //x=21,y=13 for snake2 starting point
       snake2(21, 13, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT) {
     gameOver = false;
     score1 = 0;
     score2 = 0;
     winner = 0;
+    //counter starting at 3.0 float
     countdownTimer = 3.0f;
     mode  = GameMode::MENU;
     state = GameState::PLAYING;
@@ -19,12 +22,14 @@ GameController::GameController()
 }
 
 void GameController::reshuffleObstacles() {
+    //to reshuffle first clear obstacles
     obstacles.clear();
     for (int i = 0; i < 5; i++)
         obstacles.push_back(Obstacle());
 }
 
 void GameController::resetGame() {
+    //after reset intialize 
     snake1    = Snake(5,  13, KEY_W, KEY_S, KEY_A, KEY_D);
     snake2    = Snake(21, 13, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
     food      = Food(26, 26);
@@ -35,17 +40,20 @@ void GameController::resetGame() {
     reshuffleObstacles();
 }
 
-//  AI Logic 
+//AI Logic 
 Direction GameController::getAIDirection() {
     Position head = snake2.getHead();
     Position food = this->food.getPosition();
 
     Direction preferred[4];
     int count = 0;
-
+   //if food to right
     if (food.x > head.x) preferred[count++] = RIGHT;
+    //food to left
     if (food.x < head.x) preferred[count++] = LEFT;
+    //food down
     if (food.y > head.y) preferred[count++] = DOWN;
+    //food up
     if (food.y < head.y) preferred[count++] = UP;
 
     Direction all[4] = {UP, DOWN, LEFT, RIGHT};
@@ -53,6 +61,7 @@ Direction GameController::getAIDirection() {
         bool already = false;
         for (int j = 0; j < count; j++)
             if (preferred[j] == all[i]) already = true;
+            //if any direction missing,add it
         if (!already) preferred[count++] = all[i];
     }
 
@@ -69,14 +78,14 @@ Direction GameController::getAIDirection() {
         if (snake2.containsPosition(next)) safe = false;
         if (snake1.containsPosition(next)) safe = false;
         for (int j = 0; j < (int)obstacles.size(); j++)
-            if (next == obstacles[j].getPosition()) safe = false;
+        if (next == obstacles[j].getPosition()) safe = false;
 
         if (safe) return d;
     }
 
     return snake2.getDirection();
 }
-
+//for updating AI direction ,we call getAIDirection()
 void GameController::updateAI() {
     Direction aiDir = getAIDirection();
     snake2.changeDirection(aiDir);
