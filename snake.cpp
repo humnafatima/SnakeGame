@@ -130,16 +130,19 @@ void Snake::draw() {
 }
 
 void Snake::draw(Color headColor, Color bodyColor) { //ahh drawing the snake part using raylib ofc 
-    bool isHead = true;
-    for (const auto& seg : body) {
-        int px = seg.x * CELL;
+    bool isHead = true; //first segment is treated as head 
+
+    for (const auto& seg : body) { //loop through each segment
+
+        int px = seg.x * CELL; //convert grid position - pixel position
         int py = seg.y * CELL;
-        if (isHead) {
-            DrawRectangle(px + 1, py + 1, CELL - 2, CELL - 2, headColor);
+
+        if (isHead) { 
+            DrawRectangle(px + 1, py + 1, CELL - 2, CELL - 2, headColor); //draws head slightly inset for border effect 
             int e = CELL / 6;
-            switch (dir) {
+            switch (dir) { //draws eyes based on direction
                 case RIGHT:
-                    DrawRectangle(px + CELL*3/4, py + CELL/4,   e, e, WHITE);
+                    DrawRectangle(px + CELL*3/4, py + CELL/4,   e, e, WHITE); //positions tiny squares = eyes 
                     DrawRectangle(px + CELL*3/4, py + CELL*2/3, e, e, WHITE);
                     break;
                 case LEFT:
@@ -157,7 +160,22 @@ void Snake::draw(Color headColor, Color bodyColor) { //ahh drawing the snake par
             }
             isHead = false;
         } else {
-            DrawRectangle(px + 2, py + 2, CELL - 4, CELL - 4, bodyColor);
+            DrawRectangle(px + 2, py + 2, CELL - 4, CELL - 4, bodyColor); //slightly smaller rectangles for body segnments 
         }
     }
 }
+
+/* Summary:
+Snake movement (grid-based)
+Input handling (Raylib keys)
+Growth system (food mechanic)
+Collision detection (self + other snake)
+Rendering (head + body + eyes)
+
+Deep C++ concepts:
+operator overloading
+copy constructor
+assignment operator
+const correctness
+STL list usage
+*/
