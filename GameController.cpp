@@ -10,6 +10,7 @@ GameController::GameController()
     score1 = 0;
     score2 = 0;
     winner = 0;
+    countdownTimer = 3.0f;
     mode  = GameMode::MENU;
     state = GameState::PLAYING;
     for (int i = 0; i < 5; i++)
@@ -22,7 +23,7 @@ void GameController::reshuffleObstacles() {
         obstacles.push_back(Obstacle());
 }
 
-// ── AI Logic ─────────────────────────────────
+//  AI Logic 
 Direction GameController::getAIDirection() {
     Position head = snake2.getHead();
     Position food = this->food.getPosition();
@@ -70,19 +71,39 @@ void GameController::updateAI() {
     snake2.update();
 }
 
-// ── handleMenuInput ───────────────────────────
+//  handleMenuInput 
 void GameController::handleMenuInput() {
-    if (IsKeyPressed(KEY_ONE)) mode = GameMode::ONE_PLAYER;
-    if (IsKeyPressed(KEY_TWO)) mode = GameMode::TWO_PLAYER;
+    if (mode == GameMode::MENU) {
+        if (IsKeyPressed(KEY_ONE)) {
+            mode = GameMode::COUNTDOWN;
+            countdownTimer = 3.0f;
+            // store which mode to go to after countdown
+            winner = 1;  // reuse winner as temp flag (1 = 1player, 2 = 2player)
+        }
+        if (IsKeyPressed(KEY_TWO)) {
+            mode = GameMode::COUNTDOWN;
+            countdownTimer = 3.0f;
+            winner = 2;
+        }
+    }
 }
 
-// ── update ────────────────────────────────────
+//  update 
 void GameController::update() {
     if (mode == GameMode::MENU) return;
+
+    if (mode == GameMode::COUNTDOWN) {
+        countdownTimer -= GetFrameTime();
+        if (countdownTimer <= 0) {
+            if (winner == 1) mode = GameMode::ONE_PLAYER;
+            else             mode = GameMode::TWO_PLAYER;
+            winner = 0;  // reset winner
+        }
+        return;
+    }
+
     if (gameOver) return;
-
     snake1.update();
-
     if (mode == GameMode::ONE_PLAYER)
         updateAI();
     else
@@ -133,7 +154,7 @@ void GameController::update() {
     }
 }
 
-// ── draw ──────────────────────────────────────
+//  draw 
 void GameController::draw() {
 
     // MENU SCREEN
@@ -151,6 +172,23 @@ void GameController::draw() {
         DrawText("P1: WASD   |   P2: Arrow Keys",
                  400 - MeasureText("P1: WASD   |   P2: Arrow Keys", 18)/2,
                  450, 18, DARKGRAY);
+        return;
+    }
+
+    if (mode == GameMode::COUNTDOWN) {
+        // draw empty grid while counting
+        for (int i = 0; i <= 800; i += 30) {
+            DrawLine(i, 0, i, 800, DARKGRAY);
+            DrawLine(0, i, 800, i, DARKGRAY);
+        }
+        int count = (int)countdownTimer + 1;
+        const char* txt = TextFormat("%i", count);
+        DrawText(txt,
+                400 - MeasureText(txt, 120)/2,
+                280, 120, GREEN);
+        DrawText("GET READY!",
+                400 - MeasureText("GET READY!", 28)/2,
+                420, 28, WHITE);
         return;
     }
 

@@ -4,7 +4,7 @@
 #include "obstacle.h"
 #include <vector>
 
-enum class GameMode { MENU, ONE_PLAYER, TWO_PLAYER };
+enum class GameMode { MENU, COUNTDOWN, ONE_PLAYER, TWO_PLAYER };
 enum class GameState { PLAYING, GAME_OVER };
 
 class GameController {
@@ -18,6 +18,7 @@ private:
     int winner;
     GameMode mode;
     GameState state;
+    float countdownTimer;
 
     void reshuffleObstacles();
     void updateAI();

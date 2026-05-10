@@ -1,16 +1,23 @@
-#include "snake.h"
-#include "raylib.h"
+#include "snake.h" 
+#include "raylib.h" //graphics 
 
-const int CELL = 30;
+const int CELL = 30; //a snake “block” is drawn as a 30×30 square.
 
-Position::Position(int x, int y) : x(x), y(y) {}
-bool Position::operator==(const Position& other) const { return x == other.x && y == other.y; }
-bool Position::operator!=(const Position& other) const { return !(*this == other); }
+Position::Position(int x, int y) : x(x), y(y) {} //constructor
+
+bool Position::operator==(const Position& other) const { //overloads == operator
+    return x == other.x && y == other.y; //two positions are equal if both x and y match 
+}
+
+bool Position::operator!=(const Position& other) const { 
+    return !(*this == other); //if not equal return true 
+}
 
 // Default constructor — player 1 WASD
 Snake::Snake() : dir(RIGHT), nextDir(RIGHT), growing(false),
     upKey(KEY_W), downKey(KEY_S), leftKey(KEY_A), rightKey(KEY_D) {
-    body.push_back(Position(5, 10));
+    
+    body.push_back(Position(5, 10)); //head at (5, 10)
     body.push_back(Position(4, 10));
     body.push_back(Position(3, 10));
 }
@@ -24,13 +31,13 @@ Snake::Snake(int startX, int startY, int uk, int dk, int lk, int rk)
     body.push_back(Position(startX - 2, startY));
 }
 
-Snake::Snake(const Snake& other)
+Snake::Snake(const Snake& other) //copy constructor, copies everything from other snake 
     : body(other.body), dir(other.dir), nextDir(other.nextDir),
       growing(other.growing), upKey(other.upKey), downKey(other.downKey),
       leftKey(other.leftKey), rightKey(other.rightKey) {}
 
-Snake& Snake::operator=(const Snake& other) {
-    if (this == &other) return *this;
+Snake& Snake::operator=(const Snake& other) { //assignment operator (=)
+    if (this == &other) return *this; //prevent self assignment 
     body     = other.body;
     dir      = other.dir;
     nextDir  = other.nextDir;
@@ -39,70 +46,86 @@ Snake& Snake::operator=(const Snake& other) {
     downKey  = other.downKey;
     leftKey  = other.leftKey;
     rightKey = other.rightKey;
-    return *this;
+    return *this; //returns current object 
 }
 
-bool Snake::operator==(const Snake& other) const {
+bool Snake::operator==(const Snake& other) const { //Two snakes are equal if their heads are in same position only.
     return getHead() == other.getHead();
 }
 
-void Snake::changeDirection(Direction newDir) {
-    if ((dir == UP    && newDir == DOWN)  ||
+void Snake::changeDirection(Direction newDir) { //changes snake direction
+    if ((dir == UP    && newDir == DOWN)  || //prevents reversing directly 
         (dir == DOWN  && newDir == UP)    ||
         (dir == LEFT  && newDir == RIGHT) ||
-        (dir == RIGHT && newDir == LEFT)) return;
-    nextDir = newDir;
+        (dir == RIGHT && newDir == LEFT)) 
+        return;
+    nextDir = newDir; //stores new direction for next update 
 }
 
-void Snake::update() {
-    if (IsKeyPressed(upKey)    && dir != DOWN)  nextDir = UP;
+void Snake::update() { //update function; this is the core game loop logic 
+    if (IsKeyPressed(upKey)    && dir != DOWN)  nextDir = UP; //if w is pressed, go up (but only if not currently going down- prevents reverse)
     if (IsKeyPressed(downKey)  && dir != UP)    nextDir = DOWN;
     if (IsKeyPressed(leftKey)  && dir != RIGHT) nextDir = LEFT;
     if (IsKeyPressed(rightKey) && dir != LEFT)  nextDir = RIGHT;
 
-    dir = nextDir;
-    Position head = body.front();
-    if (dir == UP)    head.y--;
+    dir = nextDir; //actual movement direction is updated
+
+    Position head = body.front(); //take current head 
+
+    if (dir == UP)    head.y--; //move head by 1 grid cell
     if (dir == DOWN)  head.y++;
     if (dir == LEFT)  head.x--;
     if (dir == RIGHT) head.x++;
 
-    body.push_front(head);
-    if (growing) { growing = false; }
-    else { body.pop_back(); }
+    body.push_front(head); //new head becomes front of list 
+
+    if (growing) { growing = false; } //is snake ate food: dont remove tail, snake grows
+    else { body.pop_back(); } //otherwise remove last segment, basically normal movement 
 }
 
-void Snake::grow() { growing = true; }
+void Snake::grow() { //sets flag so next update inceases length 
+    growing = true; 
+}
 
 bool Snake::checkSelfCollision() const {
-    Position head = body.front();
-    auto it = body.begin(); ++it;
-    for (; it != body.end(); ++it)
-        if (*it == head) return true;
+    Position head = body.front(); //get head
+
+    auto it = body.begin(); ++it; //skip head, start checjing from second segment 
+
+    for (; it != body.end(); ++it) //already did initialization in the above line, only condition is needed now 
+        if (*it == head) return true; //if head tocuehd body, collision
     return false;
 }
 
-bool Snake::collidesWithOther(const Snake& other) const {
-    Position head = body.front();
-    for (const auto& seg : other.getBody())
-        if (seg == head) return true;
+bool Snake::collidesWithOther(const Snake& other) const { //collision with other snake 
+
+    Position head = body.front(); //get head
+
+    for (const auto& seg : other.getBody()) //loop through other snake body 
+        if (seg == head) return true; //if head touces any segment, collision
     return false;
 }
 
-Position Snake::getHead() const { return body.front(); }
+Position Snake::getHead() const { //utility functions, returns head position
+    return body.front(); 
+}
 
-bool Snake::containsPosition(const Position& p) const {
+bool Snake::containsPosition(const Position& p) const { //check if snake occupies a given grid cell
     for (const auto& seg : body)
         if (seg == p) return true;
     return false;
 }
 
-std::list<Position>& Snake::getBody() { return body; }
+std::list<Position>& Snake::getBody() { //retruns body (chnageable verison)
+    return body; 
+}
 
 // Need const version for collidesWithOther
-const std::list<Position>& Snake::getBody() const { return body; }
+const std::list<Position>& Snake::getBody() const { //retruns body (read only version)
+    return body; 
+}
 
-void Snake::draw(Color headColor, Color bodyColor) {
+void Snake::draw(Color headColor, Color bodyColor) { //ahh drawing the snake part using raylib ofc 
     bool isHead = true;
     for (const auto& seg : body) {
         int px = seg.x * CELL;
