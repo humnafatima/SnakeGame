@@ -25,6 +25,7 @@ private:
     void reshuffleObstacles();
     void updateAI();
     Direction getAIDirection();
+    void resetGame(); //reset game 
 
 public:
     GameController();

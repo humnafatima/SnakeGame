@@ -23,6 +23,17 @@ void GameController::reshuffleObstacles() {
         obstacles.push_back(Obstacle());
 }
 
+void GameController::resetGame() {
+    snake1    = Snake(5,  13, KEY_W, KEY_S, KEY_A, KEY_D);
+    snake2    = Snake(21, 13, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT);
+    food      = Food(26, 26);
+    gameOver  = false;
+    score1    = 0;
+    score2    = 0;
+    winner    = 0;
+    reshuffleObstacles();
+}
+
 //  AI Logic 
 Direction GameController::getAIDirection() {
     Position head = snake2.getHead();
@@ -85,6 +96,14 @@ void GameController::handleMenuInput() {
             countdownTimer = 3.0f;
             winner = 2;
         }
+    }
+    // R to restart from game over screen
+    if (gameOver && IsKeyPressed(KEY_R)) {
+        GameMode currentMode = mode;  // remember 1player or 2player
+        resetGame();
+        mode = GameMode::MENU; //go back to menu instead of countdown
+        countdownTimer = 3.0f;
+        winner = (currentMode == GameMode::ONE_PLAYER) ? 1 : 2;
     }
 }
 
@@ -236,6 +255,6 @@ void GameController::draw() {
         } else {
             DrawText("DRAW!", 350, 330, 36, WHITE);
         }
-        DrawText("Close and rerun to play again", 230, 390, 18, LIGHTGRAY);
+        DrawText("Press R to play again", 230, 390, 18, LIGHTGRAY);
     }
 }
