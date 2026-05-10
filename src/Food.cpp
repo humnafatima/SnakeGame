@@ -1,6 +1,6 @@
 //aleeza
 
-#include "food.h"
+#include "Food.h"
 #include "raylib.h"
 
 const int FOOD_CELL = 30;

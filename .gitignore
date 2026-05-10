@@ -8,3 +8,5 @@
 
 # Optional: ignore VS Code temp files
 .vscode/*.log
+# Build directory
+build/
