@@ -209,7 +209,7 @@ void GameController::draw() {
         DrawText("Normal Food  +10 pts", 245, 338, 18, WHITE);
 
         DrawRectangle(205, 368, 20, 20, GOLD);
-        DrawText("Special Food  +20 pts (disappears!)", 245, 271, 18, WHITE);
+        DrawText("Special Food  +20 pts (disappears!)", 245, 371, 18, WHITE);
 
         DrawRectangle(205, 403, 20, 20, DARKGRAY);
         DrawRectangle(207, 405, 16, 16, GRAY);
