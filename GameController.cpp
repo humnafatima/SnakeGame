@@ -179,36 +179,55 @@ void GameController::draw() {
     // MENU SCREEN
     if (mode == GameMode::MENU) {
         ClearBackground(BLACK);
-        DrawText("SERPENT ARENA",
-                 400 - MeasureText("SERPENT ARENA", 50)/2,
-                 150, 50, GREEN);
-        DrawText("Press 1: For 1 Player vs AI",
-                 400 - MeasureText("Press 1 For 1 Player vs AI", 24)/2,
-                 300, 24, WHITE);
-        DrawText("Press 2: For 2 Players",
-                 400 - MeasureText("Press 2: For 2 Players", 24)/2,
-                 350, 24, WHITE);
-        DrawText("P1: WASD   |   P2: Arrow Keys",
-                 400 - MeasureText("P1: WASD   |   P2: Arrow Keys", 18)/2,
-                 450, 18, DARKGRAY);
-        return;
-    }
 
-    if (mode == GameMode::COUNTDOWN) {
-        // draw empty grid while counting
-        for (int i = 0; i <= 800; i += 30) {
-            DrawLine(i, 0, i, 800, DARKGRAY);
-            DrawLine(0, i, 800, i, DARKGRAY);
-        }
-        int count = (int)countdownTimer + 1;
-        const char* txt = TextFormat("%i", count);
-        DrawText(txt,
-                400 - MeasureText(txt, 120)/2,
-                280, 120, GREEN);
-        DrawText("GET READY!",
-                400 - MeasureText("GET READY!", 28)/2,
-                420, 28, WHITE);
-        return;
+        // Title
+        DrawText("SERPENT ARENA",
+                400 - MeasureText("SERPENT ARENA", 40)/2,
+                30, 40, GREEN);
+
+        // Mode selection
+        DrawText("Press 1 for 1 Player vs AI",
+                400 - MeasureText("Press 1 for 1 Player vs AI", 20)/2,
+                100, 20, WHITE);
+        DrawText("Press 2 for 2 Players",
+                400 - MeasureText("Press 2 for 2 Players", 20)/2,
+                130, 20, WHITE);
+        DrawText("P1: WASD   |   P2: Arrow Keys",
+                400 - MeasureText("P1: WASD   |   P2: Arrow Keys", 16)/2,
+                160, 16, DARKGRAY);
+
+        // Divider
+        DrawLine(200, 190, 600, 190, DARKGRAY);
+
+        // Legend title
+        DrawText("HOW TO PLAY",
+                400 - MeasureText("HOW TO PLAY", 20)/2,
+                205, 20, YELLOW);
+
+        // Food legend
+        DrawCircle(220, 245, 10, RED);
+        DrawText("Normal Food  +10 pts", 245, 238, 18, WHITE);
+
+        DrawRectangle(205, 268, 20, 20, GOLD);
+        DrawText("Special Food  +20 pts (disappears!)", 245, 271, 18, WHITE);
+
+        DrawRectangle(205, 303, 20, 20, DARKGRAY);
+        DrawRectangle(207, 305, 16, 16, GRAY);
+        DrawText("Obstacle  (reshuffles each food)", 245, 306, 18, WHITE);
+
+        // Divider
+        DrawLine(200, 335, 600, 335, DARKGRAY);
+
+        DrawText("Don't hit the wall!",
+                400 - MeasureText("Don't hit the wall!", 16)/2,
+                350, 16, DARKGRAY);
+        DrawText("Hit the other snake to win!",
+                400 - MeasureText("Hit the other snake to win!", 16)/2,
+                372, 16, DARKGRAY);
+        DrawText("Press R after game over to restart",
+                400 - MeasureText("Press R after game over to restart", 16)/2,
+                394, 16, DARKGRAY);
+         return;
     }
 
     // GRID (replaces board.drawGrid())
