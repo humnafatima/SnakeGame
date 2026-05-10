@@ -1,3 +1,5 @@
+//implemnations - humna 
+
 #include "snake.h" 
 #include "raylib.h" //graphics 
 
