@@ -1,4 +1,4 @@
-//controls everything 
+//controls everything - the brain of the game
 
 #pragma once
 #include "snake.h"
