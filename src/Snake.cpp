@@ -1,6 +1,6 @@
 //implemnations - humna 
 
-#include "snake.h" 
+#include "Snake.h" 
 #include "raylib.h" //graphics 
 
 const int CELL = 30; //a snake “block” is drawn as a 30×30 square.

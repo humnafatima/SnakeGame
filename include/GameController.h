@@ -1,9 +1,9 @@
 //controls everything 
 
 #pragma once
-#include "snake.h"
-#include "food.h"
-#include "obstacle.h"
+#include "Snake.h"
+#include "Food.h"
+#include "Obstacle.h"
 #include <vector>
 
 enum class GameMode { MENU, COUNTDOWN, ONE_PLAYER, TWO_PLAYER };

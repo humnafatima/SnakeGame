@@ -2,7 +2,7 @@
 
 #pragma once
 #include "GameObject.h"
-#include "snake.h"
+#include "Snake.h"
 #include <cstdlib>
 
 enum FoodType { NORMAL, SPECIAL };
