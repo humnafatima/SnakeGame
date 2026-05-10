@@ -4,7 +4,7 @@
 #include "GameController.h"
 
 int main() {
-    InitWindow(800, 800, "Slither Showdown"); //creates game window 
+    InitWindow(800, 800, "SERPENT ARENA"); //creates game window 
     SetTargetFPS(7); //7 frames per second
 
     GameController game;

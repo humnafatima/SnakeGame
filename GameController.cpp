@@ -179,14 +179,14 @@ void GameController::draw() {
     // MENU SCREEN
     if (mode == GameMode::MENU) {
         ClearBackground(BLACK);
-        DrawText("Slither Showdown",
-                 400 - MeasureText("SNAKE GAME", 50)/2,
+        DrawText("SERPENT ARENA",
+                 400 - MeasureText("SERPENT ARENA", 50)/2,
                  150, 50, GREEN);
-        DrawText("Press 1  —  1 Player vs AI",
-                 400 - MeasureText("Press 1  —  1 Player vs AI", 24)/2,
+        DrawText("Press 1: For 1 Player vs AI",
+                 400 - MeasureText("Press 1 For 1 Player vs AI", 24)/2,
                  300, 24, WHITE);
-        DrawText("Press 2  —  2 Players",
-                 400 - MeasureText("Press 2  —  2 Players", 24)/2,
+        DrawText("Press 2: For 2 Players",
+                 400 - MeasureText("Press 2: For 2 Players", 24)/2,
                  350, 24, WHITE);
         DrawText("P1: WASD   |   P2: Arrow Keys",
                  400 - MeasureText("P1: WASD   |   P2: Arrow Keys", 18)/2,
