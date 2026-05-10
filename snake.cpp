@@ -125,6 +125,10 @@ const std::list<Position>& Snake::getBody() const { //retruns body (read only ve
     return body; 
 }
 
+void Snake::draw() {
+    draw(GREEN, (Color){34, 139, 34, 255});  // default colors
+}
+
 void Snake::draw(Color headColor, Color bodyColor) { //ahh drawing the snake part using raylib ofc 
     bool isHead = true;
     for (const auto& seg : body) {

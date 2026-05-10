@@ -1,3 +1,5 @@
+//controls everything 
+
 #pragma once
 #include "snake.h"
 #include "food.h"

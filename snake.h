@@ -3,11 +3,12 @@
 #pragma once
 #include <raylib.h> //needed for colour since its a raylib type
 #include "Position.h"
+#include "GameObject.h"
 #include <list>
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
-class Snake {
+class Snake : public GameObject {
 private:
     std::list<Position> body;
     Direction dir;
@@ -26,7 +27,8 @@ public:
     Snake& operator=(const Snake& other);
     bool operator==(const Snake& other) const;
 
-    void update();
+    void update() override;
+    void draw () override;
     void draw(Color headColor, Color bodyColor);  // each player different color
     void grow();
     bool checkSelfCollision() const;

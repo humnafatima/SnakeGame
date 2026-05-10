@@ -1,3 +1,5 @@
+//entry point 
+
 #include "raylib.h"
 #include "GameController.h"
 
