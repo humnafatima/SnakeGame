@@ -1,5 +1,4 @@
 //neha and humna 
-
 #include "GameController.h"
 #include "raylib.h"
 #include <cstdlib>
@@ -175,14 +174,12 @@ void GameController::update() {
     }
 }
 
-//  draw 
 void GameController::draw() {
-
-    // MENU SCREEN
+    //Menu Screen
     if (mode == GameMode::MENU) {
         ClearBackground(BLACK);
 
-        // Title
+        //40 is the font of Serpent Arena,130 y location of in pixels,colour green
         DrawText("SERPENT ARENA",
                 400 - MeasureText("SERPENT ARENA", 40)/2,
                 130, 40, GREEN);
@@ -198,28 +195,27 @@ void GameController::draw() {
                 400 - MeasureText("P1: WASD   |   P2: Arrow Keys", 16)/2,
                 260, 16, DARKGRAY);
 
-        // Divider
+        // Divider 
         DrawLine(200, 290, 600, 290, DARKGRAY);
 
-        // Legend title
         DrawText("HOW TO PLAY",
                 400 - MeasureText("HOW TO PLAY", 20)/2,
                 305, 20, YELLOW);
 
-        // Food legend
+        // sign for food and there points
         DrawCircle(220, 345, 10, RED);
         DrawText("Normal Food  +10 pts", 245, 338, 18, WHITE);
-
+        //special food 
         DrawRectangle(205, 368, 20, 20, GOLD);
         DrawText("Special Food  +20 pts (disappears!)", 245, 371, 18, WHITE);
-
+        //obstacles sign
         DrawRectangle(205, 403, 20, 20, DARKGRAY);
         DrawRectangle(207, 405, 16, 16, GRAY);
         DrawText("Obstacle  (reshuffles each food)", 245, 406, 18, WHITE);
 
-        // Divider
+        // Divider-Horizontal line
         DrawLine(200, 435, 600, 435, DARKGRAY);
-
+       //A few precautions
         DrawText("Don't hit the wall!",
          400 - MeasureText("Don't hit the wall!", 16)/2,
          450, 16, DARKGRAY);
@@ -232,29 +228,34 @@ void GameController::draw() {
          return;
     }
 
-    // COUNTDOWN SCREEN
+    //countdown
     if (mode == GameMode::COUNTDOWN) {
+        //horizontal and vertical lines during countdown
         for (int i = 0; i <= 800; i += 30) {
             DrawLine(i, 0, i, 800, DARKGRAY);
             DrawLine(0, i, 800, i, DARKGRAY);
         }
+        //converts decimal to integer
         int count = (int)countdownTimer + 1;
+        //converts countdown to char
         const char* txt = TextFormat("%i", count);
+        //countdown shown in green colour
         DrawText(txt,
                 400 - MeasureText(txt, 120)/2,
                 280, 120, GREEN);
+                //get ready shown in white colour font 28
         DrawText("GET READY!",
                 400 - MeasureText("GET READY!", 28)/2,
                 420, 28, WHITE);
         return;
     }
     
-    // GRID (replaces board.drawGrid())
+    //board of the game drawing after countdown done
     for (int i = 0; i <= 800; i += 30) {
         DrawLine(i, 0, i, 800, DARKGRAY);
         DrawLine(0, i, 800, i, DARKGRAY);
     }
-
+    //snake1 drawn in green colour
     snake1.draw(GREEN, (Color){34, 139, 34, 255});
 
     if (mode == GameMode::ONE_PLAYER)
@@ -273,14 +274,16 @@ void GameController::draw() {
     else
         DrawText(TextFormat("P2: %i", score2), 730, 10, 20, BLUE);
 
-    // Controls hint
+    // WASD written in the bottom left corner
     DrawText("WASD", 10, 780, 14, DARKGREEN);
     if (mode == GameMode::TWO_PLAYER)
+    //arrow keys written at the bottom right
         DrawText("Arrow Keys", 690, 780, 14, DARKBLUE);
     else
+    //vs AI written on the bottom right if game with AI
         DrawText("vs AI", 710, 780, 14, (Color){180,0,0,255});
 
-    // GAME OVER overlay
+    //game results
     if (gameOver) {
         DrawRectangle(200, 300, 400, 160, (Color){0, 0, 0, 200});
         if (winner == 1)
