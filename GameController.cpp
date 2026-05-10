@@ -179,7 +179,7 @@ void GameController::draw() {
     // MENU SCREEN
     if (mode == GameMode::MENU) {
         ClearBackground(BLACK);
-        DrawText("SNAKE GAME",
+        DrawText("Slither Showdown",
                  400 - MeasureText("SNAKE GAME", 50)/2,
                  150, 50, GREEN);
         DrawText("Press 1  —  1 Player vs AI",
