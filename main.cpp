@@ -21,29 +21,3 @@ int main() {
     CloseWindow();
     return 0;
 }
-
-/*main()
-   │
-   ▼
-Create Window
-   │
-   ▼
-Create GameController
-   │
-   ▼
-┌─────────────────────┐
-│     GAME LOOP       │
-│                     │
-│ Handle Input        │
-│ Update Game Logic   │
-│ Begin Drawing       │
-│ Clear Screen        │
-│ Draw Everything     │
-│ End Drawing         │
-└─────────────────────┘
-   │
-   ▼
-Close Window
-   │
-   ▼
-Program Ends*/
