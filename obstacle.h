@@ -4,7 +4,7 @@
 
 #include "GameObject.h"
 #include "Position.h"
-
+//inherited from gameobject
 class Obstacle : public GameObject {
 private:
     Position pos; //stores where the obstacle is on baord 
