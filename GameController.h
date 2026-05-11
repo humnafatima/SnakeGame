@@ -6,7 +6,7 @@
 #include "obstacle.h"
 #include <vector>
 
-enum class GameMode { MENU, COUNTDOWN, ONE_PLAYER, TWO_PLAYER };
+enum class GameMode { MENU, COUNTDOWN, ONE_PLAYER, TWO_PLAYER };//GameMode is generic name for the fixed constants
 enum class GameState { PLAYING, GAME_OVER };
 
 class GameController {
@@ -28,7 +28,7 @@ private:
     void resetGame(); //reset game 
 
 public:
-    GameController();
+    GameController();//constructor
     void update();
     void draw();
     void handleMenuInput();

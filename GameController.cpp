@@ -2,7 +2,7 @@
 #include "GameController.h"
 #include "raylib.h"
 #include <cstdlib>
-
+//constructor of gameController class
 GameController::GameController()
     : food(26, 26),
     // x=5 and y=13 for snake1 starting point
@@ -40,10 +40,10 @@ void GameController::resetGame() {
     reshuffleObstacles();
 }
 
-//AI Logic - greedy algorithm (AI can navigate into a dead end - each indi steps looks safe, but the seq of moves leads it into an exlosedd area)
+//AI Logic 
 Direction GameController::getAIDirection() {
-    Position head = snake2.getHead();
-    Position food = this->food.getPosition();
+    Position head = snake2.getHead();//getting snakes direction
+    Position food = this->food.getPosition();//foods direction
 
     Direction preferred[4];
     int count = 0;
@@ -75,10 +75,10 @@ Direction GameController::getAIDirection() {
 
         bool safe = true;
         if (next.x < 0 || next.x >= 26 || next.y < 0 || next.y >= 26) safe = false;
-        if (snake2.containsPosition(next)) safe = false; //self collision
+        if (snake2.containsPosition(next)) safe = false;
         if (snake1.containsPosition(next)) safe = false;
         for (int j = 0; j < (int)obstacles.size(); j++)
-        if (next == obstacles[j].getPosition()) safe = false; //the ai is checking obstacles. it wont directly walk into one
+        if (next == obstacles[j].getPosition()) safe = false;
 
         if (safe) return d;
     }
