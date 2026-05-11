@@ -41,7 +41,6 @@ void GameController::resetGame() {
 }
 
 //AI Logic 
-//returns Direction-enum class in snake.h
 Direction GameController::getAIDirection() {
     Position head = snake2.getHead();//getting snakes direction
     Position food = this->food.getPosition();//foods direction
@@ -76,16 +75,17 @@ Direction GameController::getAIDirection() {
 
         bool safe = true;
         if (next.x < 0 || next.x >= 26 || next.y < 0 || next.y >= 26) safe = false;
-        if (snake2.containsPosition(next)) safe = false;//self hit
+        if (snake2.containsPosition(next)) safe = false;
         if (snake1.containsPosition(next)) safe = false;
         for (int j = 0; j < (int)obstacles.size(); j++)
-        if (next == obstacles[j].getPosition()) safe = false;//hitting object
+        if (next == obstacles[j].getPosition()) safe = false;
 
         if (safe) return d;
     }
 
     return snake2.getDirection();
 }
+
 //for updating AI direction ,we call getAIDirection()
 void GameController::updateAI() {
     Direction aiDir = getAIDirection();
