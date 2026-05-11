@@ -22,11 +22,6 @@ public:
 
     const std::list<Position>& getBody() const; //retruns snake body safely and caller cannot modify body coz of const
 
-    // Rule of Three (when gameController resets the game it reassigns snake objects)
-    Snake(const Snake& other); //copy constructor 
-    Snake& operator=(const Snake& other); //assignment operator 
-    //destrcutor is handled by std::list automatically 
-
     bool operator==(const Snake& other) const; //equality operator 
 
     void update() override; //handles input movement growth
@@ -65,5 +60,6 @@ inheritance: (snake, food, obstacle) all inherit from GameObject, getting the in
 polymorphism: same function name(draw), completely different behaviour per object 
 encapsulation: private data, public methods only
 operator overloading: (position, snake) ==lets us compare positions naturally for collision
-Rule of Three: (snake.cpp) copy constructor and assignment for safe copying of snake 
+Rule of Three: removed it. we are not managing any raw heap memory, theres no new or delete any where\
+hence now its "Rule of 0": we let the compiler generate everything (all our membors already know hot to copy themselves correctly (std::list, direction, int, bool))
 */
