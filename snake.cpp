@@ -65,15 +65,17 @@ void Snake::changeDirection(Direction newDir) { //changes snake direction
 }
 
 void Snake::update() { //update function; this is the core game loop logic 
-    if (IsKeyPressed(upKey)    && dir != DOWN)  nextDir = UP; //if w is pressed, go up (but only if not currently going down- prevents reverse)
+    //read input 
+    if (IsKeyPressed(upKey)    && dir != DOWN)  nextDir = UP; //if w is pressed, go up (but only if not currently going down- prevents reverse) //prevents 180 reversal 
     if (IsKeyPressed(downKey)  && dir != UP)    nextDir = DOWN;
     if (IsKeyPressed(leftKey)  && dir != RIGHT) nextDir = LEFT;
     if (IsKeyPressed(rightKey) && dir != LEFT)  nextDir = RIGHT;
 
-    dir = nextDir; //actual movement direction is updated
+    dir = nextDir; //actual movement direction is updated(commit direcitoion), (nextDir = what the player wants to do, dir = actually what happens in the frame)
 
     Position head = body.front(); //take current head 
 
+    //calculate new head
     if (dir == UP)    head.y--; //move head by 1 grid cell
     if (dir == DOWN)  head.y++;
     if (dir == LEFT)  head.x--;
@@ -81,8 +83,13 @@ void Snake::update() { //update function; this is the core game loop logic
 
     body.push_front(head); //new head becomes front of list 
 
-    if (growing) { growing = false; } //is snake ate food: dont remove tail, snake grows
-    else { body.pop_back(); } //otherwise remove last segment, basically normal movement 
+    //remove tail or keep it (if growning)
+    if (growing) { 
+        growing = false; //snake grew by 1
+    } 
+    else { 
+        body.pop_back(); //otherwise remove last segment, basically constant length 
+    } 
 }
 
 void Snake::grow() { //sets flag so next update inceases length 

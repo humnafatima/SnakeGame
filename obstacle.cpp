@@ -1,4 +1,5 @@
 //humna 
+//simple class: spawns at a random position avoiding the centre where snakes should start
 
 #include "Obstacle.h"
 #include "raylib.h"
@@ -7,7 +8,7 @@
 const int CELL_SIZE = 30;
 
 Obstacle::Obstacle() {
-    do {
+    do { //the do while keeps regenerating until it finds a safe position away from the snakes starting area 
         pos.x = rand() % 20;
         pos.y = rand() % 20;
     } while (pos.x >= 8 && pos.x <= 12 && pos.y >= 8 && pos.y <= 12);
