@@ -33,24 +33,6 @@ Snake::Snake(int startX, int startY, int uk, int dk, int lk, int rk)
     body.push_back(Position(startX - 2, startY));
 }
 
-/*Snake::Snake(const Snake& other) //copy constructor, copies everything from other snake 
-    : body(other.body), dir(other.dir), nextDir(other.nextDir),
-      growing(other.growing), upKey(other.upKey), downKey(other.downKey),
-      leftKey(other.leftKey), rightKey(other.rightKey) {}
-
-Snake& Snake::operator=(const Snake& other) { //assignment operator (=)
-    if (this == &other) return *this; //prevent self assignment 
-    body     = other.body;
-    dir      = other.dir;
-    nextDir  = other.nextDir;
-    growing  = other.growing;
-    upKey    = other.upKey;
-    downKey  = other.downKey;
-    leftKey  = other.leftKey;
-    rightKey = other.rightKey;
-    return *this; //returns current object 
-}*/
-
 bool Snake::operator==(const Snake& other) const { //Two snakes are equal if their heads are in same position only.
     return getHead() == other.getHead();
 }
