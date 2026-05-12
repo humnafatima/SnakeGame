@@ -40,7 +40,7 @@ void GameController::resetGame() {
     reshuffleObstacles();
 }
 
-//AI Logic 
+
 Direction GameController::getAIDirection() {
     Position head = snake2.getHead();//getting snakes direction
     Position food = this->food.getPosition();//foods direction
