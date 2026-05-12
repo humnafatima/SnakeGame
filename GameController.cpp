@@ -100,7 +100,7 @@ void GameController::handleMenuInput() {
             mode = GameMode::COUNTDOWN;
             countdownTimer = 3.0f;
             // store which mode to go to after countdown
-            winner = 1;  // reuse winner as temp flag (1 = 1player, 2 = 2player)
+            winner = 1;
         }
         if (IsKeyPressed(KEY_TWO)) {
             mode = GameMode::COUNTDOWN;
