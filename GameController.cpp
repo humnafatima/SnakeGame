@@ -44,7 +44,7 @@ void GameController::resetGame() {
 Direction GameController::getAIDirection() {
     Position head = snake2.getHead();//getting snakes direction
     Position food = this->food.getPosition();//foods direction
-
+     //we add our preferred direction first in preferred[i] according to where food is
     Direction preferred[4];
     int count = 0;
    //if food to right
@@ -61,7 +61,7 @@ Direction GameController::getAIDirection() {
         bool already = false;
         for (int j = 0; j < count; j++)
             if (preferred[j] == all[i]) already = true;
-            //if any direction missing,add it
+            //after preferred if any direction missing we add them
         if (!already) preferred[count++] = all[i];
     }
 
